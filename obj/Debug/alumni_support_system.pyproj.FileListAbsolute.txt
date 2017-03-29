@@ -1,0 +1,15 @@
+c:\users\siddh_000\documents\visual studio 2015\Projects\alumni_support_system\alumni_support_system\bin\Microsoft.PythonTools.WebRole.dll
+c:\users\siddh_000\documents\visual studio 2015\Projects\alumni_support_system\alumni_support_system\obj\Debug\attach_server.py
+c:\users\siddh_000\documents\visual studio 2015\Projects\alumni_support_system\alumni_support_system\obj\Debug\visualstudio_py_debugger.py
+c:\users\siddh_000\documents\visual studio 2015\Projects\alumni_support_system\alumni_support_system\obj\Debug\visualstudio_py_repl.py
+c:\users\siddh_000\documents\visual studio 2015\Projects\alumni_support_system\alumni_support_system\obj\Debug\visualstudio_py_util.py
+c:\users\siddh_000\documents\visual studio 2015\Projects\alumni_support_system\alumni_support_system\obj\Debug\__init__.py
+c:\users\siddh_000\documents\visual studio 2015\Projects\alumni_support_system\alumni_support_system\obj\Debug\__main__.py
+c:\users\siddh_000\documents\visual studio 2015\Projects\alumni_support_system\alumni_support_system\bin\AzureSetup.cfg
+c:\users\siddh_000\documents\visual studio 2015\Projects\alumni_support_system\alumni_support_system\bin\Microsoft.PythonTools.AzureSetup.exe
+c:\users\siddh_000\documents\visual studio 2015\Projects\alumni_support_system\alumni_support_system\bin\Microsoft.PythonTools.AzureSetup.exe.config
+c:\users\siddh_000\documents\visual studio 2015\Projects\alumni_support_system\alumni_support_system\bin\wfastcgi.py
+c:\users\siddh_000\documents\visual studio 2015\Projects\alumni_support_system\alumni_support_system\obj\Debug\deployment-updated-pyvenv.cfg
+c:\users\siddh_000\documents\visual studio 2015\Projects\alumni_support_system\alumni_support_system\ptvs_virtualenv_proxy.py
+c:\users\siddh_000\documents\visual studio 2015\Projects\alumni_support_system\alumni_support_system\obj\Debug\web.config
+c:\users\siddh_000\documents\visual studio 2015\Projects\alumni_support_system\alumni_support_system\obj\Debug\web.debug.config

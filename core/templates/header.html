@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Alumni</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" >
+    {% load staticfiles %}
+   <!-- <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"> -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <style>
+        .navbar {
+            margin: 0;
+        }
+
+        .row {
+            margin: 5px;
+        }
+    </style>
+</head>
+<body class="body">
+    <div class="container-fluid navbar-wrapper">
+        <div class="container">
+            <nav class="navbar navbar-default navbar-static-top">
+                <div class="container">
+                    <h1>ALUMNI SUPPORT SYSTEM</h1>
+                </div>
+            </nav>
+        </div>
+
+        <div class="container">
+            <nav class="navbar navbar-default navbar-static-top">
+                <div class="container">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#">HOME <span class="sr-only">(current)</span></a></li>
+                        <li><a href="#">MEETS</a></li>
+                        <li><a href="#">CAREERS</a></li>
+                        <li><a href="#">FORUM</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <!---footer-->
+    <div class="container">
+        <hr class="featurette-divider">
+        <footer>
+            <br><br>
+            <p class="pull-right"><a href="#">Back to top</a></p>
+            <p>&copy; 2017 Anmol Jindal &middot; Siddhartha Jha &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a> &middot; <a href="#">Contact Us</a></p>
+            <br><br>
+        </footer>
+    </div>
+</body>
+
+</html>
