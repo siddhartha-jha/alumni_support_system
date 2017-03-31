@@ -35,40 +35,49 @@
 	</style>
 </head>
 <body>
-		<div class="Absolute-Center is-Responsive">
-			<form method="post" action="">
-				{% csrf_token %}
-				New User Register
-				<ul class="registerList">
-				
-					<li id="username" class="register">
-						<div class="form-group">
-							<label for="exampleInputEmail1">Username</label>
-							{{ form.username }}
-						</div>
-					</li>
-					<li id="email" class="register">
-						<div class="form-group">
-							<label for="exampleInputEmail1">Email Address</label>
-							{{ form.email }}
-						</div>
-					</li>
-					<li id="password1" class="register">
-						<div class="form-group">
-							<label for="exampleInputEmail1">Password</label>
-							{{ form.password1 }}
-						</div>
-					</li>
-					<li id="password2" class="register">
-						<div class="form-group">
-							<label for="exampleInputEmail1">Confirm Password</label>
-							{{ form.password2 }}
-						</div>
-					</li>
-				</ul>
-				<input type="submit" value="Register" class="btn btn-default"/>
-			</form>
-		</div>
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>
+                    {{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <div class="Absolute-Center is-Responsive">
+        <form method="post" action="">
+            {% csrf_token %}
+            New User Register
+            <ul class="registerList">
+
+                <li id="username" class="register">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Username</label>
+                        {{ form.username }}
+                    </div>
+                </li>
+                <li id="email" class="register">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email Address</label>
+                        {{ form.email }}
+                    </div>
+                </li>
+                <li id="password1" class="register">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Password</label>
+                        {{ form.password1 }}
+                    </div>
+                </li>
+                <li id="password2" class="register">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Confirm Password</label>
+                        {{ form.password2 }}
+                    </div>
+                </li>
+            </ul>
+            <input type="submit" value="Register" class="btn btn-default" />
+        </form>
+    </div>
 </body>
 </html>
 

@@ -58,6 +58,9 @@
     <Content Include="core\templates\profiles\view_profile.html" />
     <Content Include="core\templates\registration\login.html" />
     <Content Include="core\templates\registration\register.html" />
+    <Content Include="core\templates\settings\change_password.html" />
+    <Content Include="core\templates\settings\delete_user.html" />
+    <Content Include="core\templates\settings\settings.html" />
     <Content Include="media\users\default_avatar.jpg" />
     <Content Include="requirements.txt" />
   </ItemGroup>
@@ -69,6 +72,7 @@
     <Folder Include="core\static\admin\" />
     <Folder Include="core\static\admin\css\" />
     <Folder Include="core\templates\" />
+    <Folder Include="core\templates\settings\" />
     <Folder Include="core\templates\profiles\" />
     <Folder Include="core\templates\registration\" />
     <Folder Include="media\" />

@@ -108,7 +108,13 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
 
+#console backend to be used for local development only 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' 
+
 LANGUAGE_CODE = 'en-us'
+
+#for reset password
+LOGIN_URL = '/login'
 
 TIME_ZONE = 'UTC'
 

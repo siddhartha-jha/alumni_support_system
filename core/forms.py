@@ -38,7 +38,12 @@ class UserForm(forms.ModelForm):
         fields = ('first_name', 'last_name', 'email')
 
 class ProfileForm(forms.ModelForm):
-    #birth_date = DateField(input_formats=settings.DATE_INPUT_FORMATS)
     class Meta:
         model = Profile
         fields = ('pic','bio','gender', 'city', 'batch', 'website', 'organization')
+
+class DeleteUserForm(forms.Form):
+    username = forms.CharField()
+    
+
+
