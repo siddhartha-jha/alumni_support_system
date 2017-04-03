@@ -103,3 +103,43 @@ def delete_user(request):
     else:
         form = DeleteUserForm()
     return render(request, 'settings/delete_user.html', {'form' : form}) 
+
+
+#writing testimonial
+@login_required(login_url='/login')
+@transaction.atomic
+def write_testimonial(request):
+    if request.method == 'POST':
+        testimonial_form = TestimonialForm(request.POST)
+        if testimonial_form.is_valid():
+            testimonial = testimonial_form.save(commit = False)
+            testimonial.user = request.user
+            testimonial.save()
+            messages.success(request,'Thanks for writing')
+            return redirect('/profile')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+       testimonial_form = TestimonialForm()
+    return render(request, 'profiles/write_testimonial.html', {
+        'testimonial_form' : testimonial_form
+    })
+
+#viewing testimonial
+@login_required(login_url='/login')
+def view_testimonial(request):
+    testimonial = Testimonial.objects.get(user = request.user)
+    return render(request,'profiles/view_testimonial.html', {'testimonial': testimonial})
+
+#deleting testimonial
+@login_required(login_url='/login')
+def delete_testimonial(request):
+    if request.method == 'GET':
+        try :
+            testimonial = Testimonial.objects.get(user = request.user)
+            testimonial.delete()
+            messages.success(request,'Testimonial deleted successfully')
+            return render(request,'profiles/view_profile.html') 
+        except ObjectDoesNotExist:
+            messages.error(request, 'You have not written a testimonial')
+            return render(request,'profiles/view_profile.html') 

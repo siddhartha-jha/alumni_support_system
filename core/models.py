@@ -1,5 +1,4 @@
 import os
-#from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
@@ -63,4 +62,15 @@ def create_user_profile(sender, instance, created, **kwargs):
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
 
+class Testimonial(models.Model):
+    user = models.OneToOneField(User, null = True, on_delete = models.CASCADE)
+    content = models.TextField(max_length = 1000, default = '', blank =  True)
+    created = models.DateTimeField(auto_now_add=True)
+   
+
+
+
+  
+
+   
 
