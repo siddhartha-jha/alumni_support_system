@@ -109,6 +109,15 @@ def delete_user(request):
 @login_required(login_url='/login')
 @transaction.atomic
 def write_testimonial(request):
+    if request.method == 'GET':
+         try:
+            testimonial = Testimonial.objects.get(user = request.user)
+            messages.success(request, 'You have already written a testimonial')
+            return render(request,'profiles/view_testimonial.html', {'testimonial': testimonial})
+         except ObjectDoesNotExist:
+            testimonial_form = TestimonialForm()
+            return render(request, 'profiles/write_testimonial.html', {'testimonial_form':testimonial_form})
+
     if request.method == 'POST':
         testimonial_form = TestimonialForm(request.POST)
         if testimonial_form.is_valid():
@@ -128,8 +137,13 @@ def write_testimonial(request):
 #viewing testimonial
 @login_required(login_url='/login')
 def view_testimonial(request):
-    testimonial = Testimonial.objects.get(user = request.user)
-    return render(request,'profiles/view_testimonial.html', {'testimonial': testimonial})
+    if request.method == 'GET':    
+        try:        
+            testimonial = Testimonial.objects.get(user = request.user)
+            return render(request,'profiles/view_testimonial.html', {'testimonial': testimonial})
+        except ObjectDoesNotExist:
+            messages.error(request,'You have not written a testimonial')
+            return render(request, 'profiles/view_profile.html')
 
 #deleting testimonial
 @login_required(login_url='/login')
