@@ -65,11 +65,20 @@ def save_user_profile(sender, instance, **kwargs):
 class Testimonial(models.Model):
     user = models.OneToOneField(User, null = True, on_delete = models.CASCADE)
     content = models.TextField(max_length = 1000, default = '', blank =  True)
-    created = models.DateTimeField(auto_now_add=True)
-   
+    pub_date = models.DateTimeField(auto_now_add = True)
 
 
+class Question(models.Model):
+    user = models.ForeignKey(User, null = True, on_delete = models.CASCADE)
+    title = models.TextField(max_length = 200)
+    description = models.TextField(max_length = 500, default = '', blank = True)
+    pub_date = models.DateTimeField(auto_now_add = True)
 
+class Answer(models.Model):
+    user = models.ForeignKey(User, null = True, on_delete = models.CASCADE)
+    question = models.ForeignKey(Question, null = True, on_delete = models.CASCADE)
+    answer = models.TextField(max_length = 1000)
+    pub_date = models.DateTimeField(auto_now_add = True)
   
 
    

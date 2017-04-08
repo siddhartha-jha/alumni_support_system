@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>New Questions</title>
+</head>
+<body>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>
+            {{ message }}</li>
+            {% endfor %}
+    </ul>
+    {% endif %}
+
+    <h3> New Questions : </h3>
+    {% for q in ques %}
+    <ul>
+        <li>
+            <p> Question : {{q.title}} </p>
+            <p> Question Description : {{q.description}}</p>
+            <a href="{% url 'post_answer' pk=q.pk %}"> Answer </a>
+          
+        </li>
+    </ul>
+    {% endfor %}
+</body>
+</html>
+
+<!-- extra fields : user , pub_date-->

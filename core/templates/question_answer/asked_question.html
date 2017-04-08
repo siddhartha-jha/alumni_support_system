@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Asked Questions</title>
+</head>
+<body>
+     {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>
+            {{ message }}</li>
+            {% endfor %}
+    </ul>
+    {% endif %}
+
+
+    <h3> Your Questions : </h3>
+    {% for q in ques%}
+    <ul>
+        <li>
+            Question : {{q.title}}
+            Question Description : {{q.description}}
+            <a href="{% url 'delete_question' pk2=q.pk %}"> Delete Question </a> 
+            <a href="{% url 'view_answer2' pk=q.pk %}"> View Answers </a>
+        </li>
+    </ul>
+    {% endfor %}
+    <a href="/questionanswer"> Go to q &amp; a </a>
+</body>
+</html>
+
+<!-- extra fields : user , pub_date-->

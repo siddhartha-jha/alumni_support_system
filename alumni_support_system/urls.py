@@ -32,14 +32,31 @@ urlpatterns = [
     url(r'^reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
         auth_views.password_reset_confirm, name='password_reset_confirm'),
     url(r'^reset/done/$', auth_views.password_reset_complete, name='password_reset_complete'),
+    
     url(r'^profile/$', core_views.view_profile, name = 'view_profile'),
     url(r'^profile/editprofile/$', core_views.update_profile, name='edit_profile'),
     url(r'^profile/writetestimonial/$', core_views.write_testimonial, name='write_testimonial'),
     url(r'^profile/viewtestimonial/$', core_views.view_testimonial, name='view_testimonial'),
     url(r'^profile/deletetestimonial/$', core_views.delete_testimonial, name='delete_testimonial'),
+    
     url(r'^settings/$', core_views.settings, name='settings'), 
     url(r'^settings/changepassword/$', core_views.change_password, name='change_password'),
     url(r'^settings/deleteuser/$', core_views.delete_user, name='delete_user'),
+    
+    url(r'^questionanswer/$', core_views.question_answer, name='question_answer_home'),
+    url(r'^questionasnwer/askquestion/$', core_views.post_question, name='post_question'),
+    url(r'^questionanswer/answerquestion/(?P<pk>\d+)/$', core_views.post_answer, name='post_answer'),
+    url(r'^questionanswer/viewanswers/(?P<pk>\d+)/$', core_views.view_answer, name='view_answer'),
+    url(r'^questionanswer/viewaskedquestions/$', core_views.view_asked_question, name='view_asked_question'),
+    url(r'^questionanswer/viewaskedquestions/viewanswers/(?P<pk>\d+)/$', core_views.view_answer, name='view_answer2'),
+    url(r'^questionanswer/viewansweredquestions/$', core_views.view_answered_question, name='view_answered_question'),
+    url(r'^questionanswer/viewansweredquestions/viewanswers/(?P<pk>\d+)/$', core_views.view_answer, name='view_answer3'),
+    url(r'^questionanswer/viewunansweredquestions/$', core_views.view_unanswered_question, name = 'view_unanswered_question'),
+    url(r'^questionanswer/viewaskedquestions/deletequestion/(?P<pk2>\d+)/$', core_views.delete_question, name = 'delete_question'),
+    #url(r'^questionanswer/viewanswers/(?P<pk>\d+)/deleteanswer/(?P<pk2>\d+)/$', core_views.delete_answer, name='delete_answer'),
+    #url(r'^questionanswer/viewaskedquestions/viewanswers/(?P<pk>\d+)/deleteanswer/(?P<pk2>\d+)/$', core_views.delete_answer, name='delete_answer'),
+    #url(r'^questionanswer/viewansweredquestions/viewanswers/(?P<pk>\d+)/deleteanswer/(?P<pk2>\d+)/$', core_views.delete_answer, name='delete_answer'),
+
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT})
 
 ]

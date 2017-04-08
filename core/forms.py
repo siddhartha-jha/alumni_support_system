@@ -1,6 +1,6 @@
 import re
 from django.contrib.auth.models import User
-from core.models import Profile
+from core.models import Profile, Testimonial, Question, Answer
 from django.core.exceptions import ObjectDoesNotExist
 from django import forms
 
@@ -31,6 +31,7 @@ class RegistrationForm(forms.Form):
             return username
         raise forms.ValidationError('Username is already taken.')
 
+    
 
 class UserForm(forms.ModelForm):
     class Meta:
@@ -44,6 +45,23 @@ class ProfileForm(forms.ModelForm):
 
 class DeleteUserForm(forms.Form):
     username = forms.CharField()
+
+class TestimonialForm(forms.ModelForm):
+    class Meta:
+        model = Testimonial
+        fields = ('content',) 
+
+class QuestionForm(forms.ModelForm):
+    class Meta:
+        model = Question
+        fields = ('title', 'description')
+
+class AnswerForm(forms.ModelForm):
+    class Meta:
+        model = Answer
+        fields = ('answer',)
+
+
     
 
 
