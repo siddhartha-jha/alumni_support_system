@@ -1,16 +1,19 @@
 import re
-from django.contrib.auth.models import User
-from core.models import Profile, Testimonial, Question, Answer
+from django.contrib.auth.models import User, Group
+from core.models import Profile, Testimonial, Question, Answer, Event, EventGallery, Comment
 from django.core.exceptions import ObjectDoesNotExist
 from django import forms
 
 class RegistrationForm(forms.Form):
+    CHOICES = [( group.name, group.name ) for group in Group.objects.all()]
+    
     username = forms.CharField(label='Username', max_length=30)
     email = forms.EmailField(label='Email')
     password1 = forms.CharField(label='Password',
                           widget=forms.PasswordInput())
     password2 = forms.CharField(label='Password (Again)',
                         widget=forms.PasswordInput())
+    groupname = forms.ChoiceField(choices=CHOICES,widget = forms.widgets.RadioSelect())
     
     def clean_password2(self):
         if 'password1' in self.cleaned_data:
@@ -31,7 +34,6 @@ class RegistrationForm(forms.Form):
             return username
         raise forms.ValidationError('Username is already taken.')
 
-    
 
 class UserForm(forms.ModelForm):
     class Meta:
@@ -41,7 +43,7 @@ class UserForm(forms.ModelForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ('pic','bio','gender', 'city', 'batch', 'website', 'organization')
+        fields = ('pic','bio','gender', 'city', 'batch', 'website','twitter','linkedin', 'organization')
 
 class DeleteUserForm(forms.Form):
     username = forms.CharField()
@@ -60,6 +62,31 @@ class AnswerForm(forms.ModelForm):
     class Meta:
         model = Answer
         fields = ('answer',)
+
+class EventForm(forms.ModelForm):
+    class Meta:
+        model = Event
+        fields = ('title', 'icon', 'date', 'time', 'venue', 'description') 
+
+class EventGalleryForm(forms.ModelForm):
+    class Meta:
+        model = EventGallery
+        fields = ('pic',)
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('content',)
+
+class EmailForm(forms.Form):
+    subject = forms.CharField(max_length=50)
+    body = forms.CharField(widget = forms.Textarea())
+
+
+
+
+
+
 
 
     
