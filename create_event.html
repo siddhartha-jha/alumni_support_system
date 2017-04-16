@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Create Event</title>
+</head>
+<body>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>
+            {{ message }}</li>
+            {% endfor %}
+    </ul>
+    {% endif %}
+    <h3> Create Your Event : </h3>
+    <form enctype="multipart/form-data" method="post">
+        {%csrf_token%}
+        {{event_form.as_p}}
+        <button type="submit"> Create </button>
+    </form>
+</body>
+</html>
+
+
+<!-- form fields :
+            'title', 'icon', 'date','time', 'venue', 'description'
+-->

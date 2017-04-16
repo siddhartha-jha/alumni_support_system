@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>My Created Events</title>
+</head>
+<body>
+    <h3> Your Created Events : </h3>
+
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>
+            {{ message }}</li>
+            {% endfor %}
+    </ul>
+    {% endif %}
+    {%if eve %}
+        {% for e in eve %}
+                <ul>
+                    <li> Event Name : <a href="{% url 'view_event2' pk1=e.pk %}"> {{e.title}} </a> </li>
+                    <li> Event Description : {{e.description}}</li>
+                    <li> Event Icon : <img src="{{e.icon.url}}" alt="cannot display" height="200" width="200" /> </li>
+                    <li> Event Venue : {{e.venue}}</li>
+                    <li> Event Date : {{e.date}}</li>
+                     <li> Event Time : {{e.time}}</li>
+                    <li> <a href="{% url 'delete_event' pk2=e.pk %}">Delete Event</a> </li>
+                    <li> <a href="{% url 'update_event_gallery' pk3=e.pk %}"> Update Event Gallery</a> </li>
+                </ul>
+        {% endfor %}
+    {%else%}
+    <p> No events to display </p>
+    {%endif%}
+
+    <a href="/event"> Events </a>
+
+</body>
+</html>

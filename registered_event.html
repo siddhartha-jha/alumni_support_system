@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Registered Event</title>
+</head>
+<body>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>
+            {{ message }}</li>
+            {% endfor %}
+    </ul>
+    {% endif %}
+    <h3>Events you are attending:</h3>
+    {%for e in eve%}
+    <ul>
+        <li> Event Name : <a href="{% url 'view_event3' pk1=e.pk %}"> {{e.title}} </a> </li>
+        <li> Event Description : {{e.description}}</li>
+        <li> Event Icon :  <img src="{{e.icon.url}}" alt="cannot display" height="200" width="200" /></li>
+        <li> Event Organiser : <a href="{% url 'view_profile3' pk2=e.user.pk %}">{{e.user.get_full_name}} </a> </li> 
+        <li> Event Organiser's dp : <img src="{{e.user.profile.pic.url}}" alt="can't display" height="50" width="50" /></li>
+        <li> Event Venue : {{e.venue}}</li>
+    </ul>
+    {% endfor %}
+
+    <a href="/event/"> Events </a>
+</body>
+</html>

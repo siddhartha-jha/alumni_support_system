@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>View Event</title>
+</head>
+<body>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>
+            {{ message }}
+        </li>
+            {% endfor %}
+    </ul>
+    {% endif %}
+    <h3> Event Details : </h3>
+    <ul>
+        <li> Event Name :  {{eve.title}}  </li>
+        <li> Event Description : {{eve.description}}</li>
+        <li> Event Icon : <img src="{{eve.icon.url}}" alt="cannot display" height="200" width="200" /> </li>
+        <li> Event Organiser : {{eve.user.get_full_name}} </a> </li>
+        <li> Event Organiser's dp : <img src="{{eve.user.profile.pic.url}}" alt="can't display" height="50" width="50" /></li>
+        <li> Event Date : {{eve.date}}</li>
+        <li> Event Time : {{eve.time}}</li>
+        <li> Event Venue : {{eve.venue}}</li>
+    </ul>
+
+    {% if com %}
+        <p> Comments : </p>
+        {%for c in com%}
+            <p> {{c.content}}</p>
+            <p> {{c.user.get_full_name}}</p>
+        {% endfor %}
+   {% endif %}
+     <a href="{%url 'post_comment' pk1=eve.pk pk3=eve.pk %}">Post Comment</a>
+
+    {% if att %}
+        <p> Attendees : </p>
+        {% for a in att %}
+            <ul>
+                <li>
+                    {{a.user.get_full_name}}
+                    <img src="{{a.user.profile.pic.url}}" alt="cannot display" height="50" width="50" />
+                </li>
+            </ul>
+        {% endfor %}
+    {% endif %}
+
+    {% if gal %}
+        <p> Gallery : </p>
+        {% for g in gal %}
+            <ul>
+                <li> <img src="{{g.pic.url}}" alt="cannot display" height="200" width="200" /> </li>
+            </ul>
+        {% endfor %}
+    {% endif %}
+
+    <a href="/event"> Events </a>
+
+</body>
+</html>
