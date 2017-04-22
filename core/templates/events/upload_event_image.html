@@ -1,0 +1,52 @@
+﻿{% extends "header.html" %}
+
+{% block title %}
+
+<title>Upload Image | {{eve.title}}</title>
+
+{% endblock %}
+
+{% block style %}
+
+#id_pic {
+    padding:20px;
+}
+
+label {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+{% endblock %}
+
+{% block content %}
+
+<h2>Upload Image To Image Gallery</h2>
+<div class="row">
+    <div class="col-md-3">
+        <ul class="nav nav-pills nav-stacked">  
+            <li role="presentation" ><a href="/event">Events Home</a></li>
+            <li role="presentation" ><a href="/event/createevent">Create Event </a></li>
+            <li role="presentation" ><a href="/event/myevents">My Created Events</a></li>
+            <li role="presentation" ><a href="/event/registeredevents">Registered Events</a></li>
+        </ul>
+    </div>
+    <div class="col-md-9">
+        <h3> Upload Image For Event </h3>
+        <p style="font-weight: bold;display: inline; "> Event title  </p>{{eve.title}}<br>
+        <p style="font-weight: bold;display: inline;"> Event description </p>{{eve.description}}
+        <form enctype="multipart/form-data" method="post">
+            {%csrf_token%}
+            {{image_upload_form.as_p}}
+            <button type="submit" class="btn btn-primary" style="margin-left: 20px;width: 200px;"> Upload </button>
+        </form>
+    </div>
+</div>
+    
+
+{% endblock %}
+<!-- field is pic-->

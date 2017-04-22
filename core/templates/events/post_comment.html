@@ -1,0 +1,47 @@
+﻿{% extends "header.html" %}
+{% block title %}
+<title>Add Comment</title>
+{% endblock %}
+
+{% block style %}
+    	#id_content {
+    		width:95%;
+    		height:50px;
+    		resize:none;
+    		display:inline;
+    		border-radius: 4px;
+    		border:1px solid #ccc;
+    	}
+
+    	label {
+    		width: 0.1px;
+			height: 0.1px;
+			opacity: 0;
+			overflow: hidden;
+			position: absolute;
+			z-index: -1;
+    	}
+
+    	.btn-primary {
+    		display: inline;
+    		color: white;
+    		background-color: #1b809e;
+    		padding: 10px;
+    		border-radius: 4px;
+    		border:1px solid #ccc;
+    	}
+{% endblock %}
+
+{% block error %}
+<something></something>
+{% endblock %}
+
+{% block content %}
+    <form method="post">
+        {%csrf_token%}
+        {{comment_form.as_p}}
+        <button type="submit" class="btn-primary">post</button>
+    </form>
+{% endblock %}
+
+<!-- form field : content-->

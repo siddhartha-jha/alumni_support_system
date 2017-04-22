@@ -1,0 +1,110 @@
+﻿{% extends "header.html" %}
+
+{% block style %}
+
+.inva-a, .inva-a:hover {
+    color:inherit;
+    text-decoration: none;
+}
+textarea {
+    width:100%;
+    height:150px;
+    resize:none;
+    border-radius:4px;
+    border:1px solid #ccc;
+}
+
+#id_icon {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.labelllll {
+    font-size: 20px;
+    float:right;
+    font-family:Palatino Linotype;
+}
+#id_date, #id_time {
+    width:100%;
+    border:1px solid #ccc;
+    border-radius:4px;
+}
+
+.icon-label {
+    padding:10px;
+    width:200px;
+    color:white;
+    background-color:#1b809e;
+    border-radius:4px;
+}
+
+.icon-label:hover {
+    opacity:0.6;
+    outline: 1px dotted #000;
+    outline: -webkit-focus-ring-color auto 5px;
+}
+{% endblock %}
+
+{% block content %} 
+
+    <h1> Create Your Event  </h1>
+    
+    <div class="col-md-3">
+        <ul class="nav nav-pills nav-stacked">  
+            <li role="presentation" ><a href="/event">Events Home</a></li>
+            <li role="presentation" class="active"><a href="/event/createevent">Create Event </a></li>
+            <li role="presentation" ><a href="/event/myevents">My Created Events</a></li>
+            <li role="presentation" ><a href="/event/registeredevents">Registered Events</a></li>
+        </ul>
+    </div>
+    <div class="col-md-9">
+    
+        <form enctype="multipart/form-data" method="post">
+            {%csrf_token%}
+            <div class="row">
+            <div class="col-md-4">
+                <p>Select Event Poster</p>
+                {{event_form.icon}}
+                <label for="id_icon" class="icon-label">Choose a file</label><br><br><br>
+                <button type="submit" class="btn btn-primary"> Create </button>
+            </div>
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-xs-4"><span class="labelllll">Title</span></div>
+                    <div class="col-xs-8">{{event_form.title}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4"><span class="labelllll">Ajenda</span></div>
+                    <div class="col-xs-8">{{event_form.description}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4"><span class="labelllll">Date</span></div>
+                    <div class="col-xs-8">{{event_form.date}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4"><span class="labelllll">Time</span></div>
+                    <div class="col-xs-8">{{event_form.time}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4"><span class="labelllll">Venue</span></div>
+                    <div class="col-xs-8">{{event_form.venue}}</div>
+                </div>
+            </div>
+            </div>
+            
+        </form>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script type="text/javascript">    
+        $('#id_date').attr("type","date");
+        $('#id_time').attr("type","time");
+    </script>
+{% endblock %}
+
+<!-- form fields :
+            'title', 'icon', 'date','time', 'venue', 'description'
+-->

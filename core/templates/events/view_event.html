@@ -1,0 +1,126 @@
+{% extends "header.html" %}
+
+{% block title %}
+<title>Event | {{eve.title}} </title>
+{% endblock %}
+
+{% block style %}
+.event {
+    border:1px solid #eee;
+    padding:20px;
+    margin-top:10px;
+    border-radius:5px;
+    border-left-color: #1b809e;
+    border-left-width: 5px;
+    background-color: #f7f7f9;
+}
+
+.in-detail {
+    border:1px solid #ddd;
+    border-radius:3px;    
+    background-color:#fff;
+    padding-left:5px;
+    text-align:center;
+}
+
+.inva-a, .inva-a:hover {
+    color:inherit;
+    text-decoration: none;
+}
+
+.comment {
+    padding:10px;
+    border:1px solid #eee;
+    border-radius:5px;
+    border-left-color: #1b809e;
+    border-left-width: 5px;
+    background-color: #f7f7f9;
+    width:100%;
+}
+
+.comment-post {
+    width:100%;
+    height:150px;
+}
+{% endblock %}
+
+{% block content %} 
+
+    <h1>  Events  </h1>
+    <div class="col-md-8">
+            <div class="row event">
+                <div class="col-md-3">
+                    <div class="row">
+                    <img src="{{eve.icon.url}}" alt="cannot display" height="100" width="100" class="img-responsive center-block img-rounded" />
+                    </div>
+                    <div class="row">
+                        <center>
+                        <img src="{{eve.user.profile.pic.url}}" alt="can't display" height="50" width="50" class="img-responsive img-rounded"/>
+                        <span class="block">{{eve.user.get_full_name}}</span> 
+                        </center>
+                    </div>
+                </div>
+                <div class="col-md-9 in-detail">
+                    <div class="row">
+                        <h2><a href="{% url 'view_event2' pk1=eve.pk %}"> {{eve.title}} </a></h2> 
+                    </div>
+                    <div class="row">
+                        <b>Agenda :</b> {{eve.description}}
+                    </div>
+                    <div class="row">
+                        <b>Event Date :</b> {{eve.date}}
+                    </div>
+                    <div class="row">
+                        <b>Event Time :</b> {{eve.time}}
+                    </div>
+                    <div class="row">
+                        <b>Event Venue :</b> {{eve.venue}}
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="padding-left: 15px;">
+                {% if com %}
+                    <h3>Comments</h3>
+                    {%for c in com%}
+                    <div class="row comment">
+                        <span style="font-weight:bold;font-size: 120%;">{{c.user.get_full_name}}</span> : 
+                        <span>{{c.content}}</span>                        
+                    </div>
+                    {% endfor %}
+                {% endif %}
+                <div class="row">
+                    <!--<iframe src="{% url 'post_comment' pk1=eve.pk pk3=eve.pk %}" class="comment-post" scrolling="no" frameborder="0"></iframe>-->
+                    <a href="{%url 'post_comment' pk1=eve.pk pk3=eve.pk %}" class="btn btn-primary">Post Comment</a>
+                </div>
+            </div> 
+    </div>
+    <div class="col-md-4" style="padding-left:30px; ">    
+        {% if att %}
+            <center><p style="font-size: 25px;font-family:Palatino Linotype;color: #333"> Attendees </p></center>  
+            <div class="row">          
+            {% for a in att %}
+                <div class="col-xs-4">
+                    <img src="{{a.user.profile.pic.url}}" alt="cannot display" class="img-circle" height="100%" width="100%" data-toggle="tooltip" data-placement="auto" title="{{a.user.get_full_name}}"/>
+                </div>                
+            {% endfor %}
+            </div>
+            <script>
+                $(document).ready(function(){
+                    $('[data-toggle="tooltip"]').tooltip();   
+                });
+            </script>
+            <hr>
+        {% endif %}
+        {% if gal %}
+            <center><p style="font-size: 25px;font-family:Palatino Linotype;color: #333"> Gallery </p></center>
+            <div class="row">
+                {% for g in gal %}
+                    <div class="col-xs-6" style="margin-bottom:10px">
+                        <img src="{{g.pic.url}}" alt="cannot display" class="img-rounded" height="100%" width="100%" />
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
+
