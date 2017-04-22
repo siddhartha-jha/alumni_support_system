@@ -1,38 +1,56 @@
-﻿<!DOCTYPE html>
+﻿{% extends "header.html" %}
 
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="utf-8" />
-    <title>Question &amp; Answer</title>
-</head>
-<body>
+{% block style %}
+h3 > span {
+    padding:15px;
+    margin-right:10px;
+}
 
-    {% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>
-            {{ message }}</li>
-            {% endfor %}
-    </ul>
-    {% endif %}
+.que {
+    border:1px solid #ccc;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+.options {
+    float:right;
+    position:static;
+    top:0px;
+}
+
+.glyp, .glyp:hover{
+    margin-left:5px;
+    color:black;
+}
+{% endblock %}
+
+{% block content %}
+    
+    <div class="row">
+        <div class="col-md-3">
+            <ul class="nav nav-pills nav-stacked">
+                <li role="presentation" class="active"><a href="/questionanswer">All Questions</a></li>
+                <li role="presentation"><a href="/questionanswer/askquestion">Ask Question</a></li>
+                <li role="presentation"><a href="/questionanswer/viewaskedquestions">Your Questions</a></li>
+                <li role="presentation"><a href="/questionanswer/viewansweredquestions">View Answered Questions</a></li>
+                <li role="presentation"><a href="/questionanswer/viewunansweredquestions">Answer Questions</a></li>
+            </ul>
+                    </div>
+        <div class="col-md-9">
     <h3> Questions : </h3>
     {% for q in ques %}
-    <ul>
-        <li>
-            <p> Question : {{q.title}} </p>
-            <p> Question Description : {{q.description}}</p>
-            <a href="{% url 'post_answer' pk=q.pk %}"> Answer </a>
-            <a href="{% url 'view_answer' pk=q.pk %}"> View Answers </a>
-        </li>
-    </ul>
+        <div class="row que">
+            <h3><span class="label label-primary"> Question </span> {{q.title}}</h3><br>
+            <p> {{q.description}}</p>
+            <span style="float: right;">Asked by <strong>{{q.user.get_full_name}}</strong> @ <em>{{q.pub_date}}</em></span>
+            <div class="options" style="float: right;clear: both;">
+                <a href="{% url 'post_answer' pk=q.pk %}"  class="glyphicon glyphicon-pencil glyp"></a>
+                <a href="{% url 'view_answer' pk=q.pk %}" class="glyphicon glyphicon-menu-hamburger glyp"></a>
+            </div>
+        </div>
     {% endfor %}
-    <a href="/questionasnwer/askquestion"> Ask question</a>
-    <a href="/questionanswer/viewaskedquestions"> Your Questions</a>
-    <a href="/questionanswer/viewansweredquestions"> Your Answers </a>
-    <a href="/questionanswer/viewunansweredquestions"> Answer questions</a>
-    <a href="/">home</a>
-
-</body>
-</html>
-
+        </div>
+    </div>
+{% endblock %}
 <!-- extra fields : user , pub_date-->

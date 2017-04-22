@@ -1,34 +1,57 @@
-﻿<!DOCTYPE html>
+﻿{% extends "header.html" %}
+{% block style %}
+h3 > span {
+    padding:15px;
+    margin-right:10px;
+}
 
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="utf-8" />
-    <title>Asked Questions</title>
-</head>
-<body>
-     {% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>
-            {{ message }}</li>
+.que {
+    border:1px solid #ccc;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 10px;
+}
+
+.options {
+    float:right;
+    position:static;
+    top:0px;
+}
+
+.glyp, .glyp:hover{
+    margin-left:5px;
+    color:black;
+}
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-3">
+            <ul class="nav nav-pills nav-stacked">
+                <li role="presentation"><a href="/questionanswer">All Questions</a></li>
+                <li role="presentation"><a href="/questionanswer/askquestion">Ask Question</a></li>
+                <li role="presentation" class="active"><a href="/questionanswer/viewaskedquestions">Your Questions</a></li>
+                <li role="presentation"><a href="/questionanswer/viewansweredquestions">View Answered Questions</a></li>
+                <li role="presentation"><a href="/questionanswer/viewunansweredquestions">Answer Questions</a></li>
+            </ul>
+        </div>
+        <div class="col-md-9">
+            <h3> Your Questions : </h3>
+            {% for q in ques%}
+                <div class="row que">
+                    <h3><span class="label label-primary"> Question </span> {{q.title}}</h3><br>
+                    
+                    {{q.description}}
+                    <span style="float: right;">Asked by <strong>{{q.user.get_full_name}}</strong> @ <em>{{q.pub_date}}</em></span>
+                    <div class="options" style="float: right;clear: both;">
+                        <a href="{% url 'delete_question' pk2=q.pk %}" class="glyphicon glyphicon-trash glyp" ></a>
+                        <a href="{% url 'view_answer2' pk=q.pk %}" class="glyphicon glyphicon-menu-hamburger glyp"></a>
+                    </div>
+                </div>
             {% endfor %}
-    </ul>
-    {% endif %}
-
-
-    <h3> Your Questions : </h3>
-    {% for q in ques%}
-    <ul>
-        <li>
-            Question : {{q.title}}
-            Question Description : {{q.description}}
-            <a href="{% url 'delete_question' pk2=q.pk %}"> Delete Question </a> 
-            <a href="{% url 'view_answer2' pk=q.pk %}"> View Answers </a>
-        </li>
-    </ul>
-    {% endfor %}
-    <a href="/questionanswer"> Go to q &amp; a </a>
-</body>
-</html>
+        </div>
+    </div>
+{% endblock %}
 
 <!-- extra fields : user , pub_date-->

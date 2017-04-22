@@ -1,26 +1,51 @@
-﻿<!DOCTYPE html>
+﻿{% extends "header.html" %}
 
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="utf-8" />
-    <title>Post Question</title>
-</head>
-<body>
-     {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-                 <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
+{% block style %}
+textarea {
+    resize:none;
+    width:500px;
+    height: 100px;
+    border-radius:10px;
+}
+#poster {
+    width:200px;
+}
+.labell {
+    font-size:20;
+    padding:10px;    
+    border-radius:10px;
+    background-color:#6699ff;
+    color:white;
+}
+{% endblock %}
+{% block content %}
 
-    <h3> Post your question</h3>
+    <div class="row">
+        <div class="col-md-3">
+            <ul class="nav nav-pills nav-stacked">
+                <li role="presentation"><a href="/questionanswer">All Questions</a></li>
+                <li role="presentation" class="active"><a href="/questionanswer/askquestion">Ask Question</a></li>
+                <li role="presentation"><a href="/questionanswer/viewaskedquestions">Your Questions</a></li>
+                <li role="presentation"><a href="/questionanswer/viewansweredquestions">View Answered Questions</a></li>
+                <li role="presentation"><a href="/questionanswer/viewunansweredquestions">Answer Questions</a></li>
+            </ul>
+        </div>
+        <div class="col-md-9">
+    <h3> Post your question</h3><br>
     <form method="post" action="">
         {%csrf_token%}
-        {{question_form.as_p}}
-        <button type="submit">Post</button>
+        <div class="row">
+            <span class="labell">Question</span><br>
+            {{question_form.title}}
+        </div><br>
+        <div class="row">
+            <span class="labell">Description</span><br>
+            {{question_form.description}}
+        </div>
+        <button class="btn btn-primary btn-lg btn-block" id="poster" type="submit">Post</button>
     </form>
-</body>
-</html>
+        </div>
+    </div>
+{% endblock %}
 
 <!-- form fields : title, description -->
