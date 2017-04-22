@@ -1,20 +1,20 @@
-﻿<!DOCTYPE html>
+﻿{% extends 'header.html' %}
+{% block title %}
+<title>Your Testimonials</title>
+{% endblock %}
 
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="utf-8" />
-    <title></title>
-</head>
-<body>
-    {% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>
-            {{ message }}</li>
-            {% endfor %}
-    </ul>
-    {% endif %}
-     Your testimonials :
-        {{testimonial.content}}
-</body>
-</html>
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-8">
+            <center><h2 style="color: #666;font-family:Palatino Linotype;"><i>&quot;{{testimonial.content}}&quot;</i></h2></center>
+        </div>
+        <div class="col-md-4">
+            <ul class="nav nav-pills nav-stacked">
+                <li role="presentation" class="active"><a href="/profile/viewtestimonial/">View Testimonials</a></li>
+                <li role="presentation"><a href="/profile/writetestimonial/">Write Testimonials</a></li>
+                <li role="presentation"><a href="/questionanswer/viewaskedquestions/">Asked Questions</a></li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}

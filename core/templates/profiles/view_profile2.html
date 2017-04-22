@@ -1,0 +1,83 @@
+﻿{% extends 'header.html' %}
+{% block title %}
+<title>{{user.get_full_name}} | Alumni Support System</title>
+{% endblock %}
+
+{% block style %}
+.skip {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+{% endblock %}
+
+{% block content %}
+        <br><br>
+    <div class="row">
+        <div class="col-md-3">
+            <img src="{{user.profile.pic.url}}" alt=":/" class="img-responsive img-rounded center-block">
+            
+            <center><h3 class="center-block">{{user.get_full_name}}</h3></center>
+            <div class="row">
+            <center>
+            {% if user.profile.twitter %}
+                <a href="{{user.profile.twitter}}" class="fa fa-twitter" style="font-size: 36px;color:#1b809e;text-decoration: none"></a>
+            {% endif %}
+            {% if user.profile.linkedin %}
+                <a href="{{user.profile.linkedin}}" class="fa fa-linkedin" style="font-size: 36px;color:#1b809e;text-decoration: none"></a>
+            {% endif %}
+            </center>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                    <h2>{{user.get_full_name}}</h2>
+            </div>
+            <div class="row">
+                    <h3>
+                        {{user.profile.bio}}
+                    </h3>
+            </div><br>
+            {% if user.email %}
+            <div class="row input-group">
+                <span class="input-group-addon"> Email </span>
+                <span class="form-control">{{user.email}}</span>
+            </div>
+            {% endif %}
+            {% if user.profile.batch %}
+            <div class="row input-group">
+                <span class="input-group-addon">Batch</span>
+                <span class="form-control">{{user.profile.batch}}</span>
+            </div>
+            {% endif %}
+            {% if user.profile.city %}
+            <div class="row input-group">
+                <span class="input-group-addon">Location</span>
+                <span class="form-control">{{user.profile.city}}</span>
+            </div>
+            {% endif %}
+            {% if user.profile.gender %}
+            <div class="row input-group">
+                <span class="input-group-addon">Gender</span>               
+                <span class="form-control">{{user.profile.gender}}</span>
+            </div>
+            {% endif %}
+            {% if user.profile.organization %}
+            <div class="row input-group">
+                <span class="input-group-addon">Currently Working at</span>
+                <span class="form-control">{{user.profile.organization}}</span>
+            </div>
+            {% endif %}
+            {% if user.profile.website %}
+            <div class="row input-group">
+                <span class="input-group-addon">Website</span>
+                <span class="form-control">{{user.profile.website}}</span>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

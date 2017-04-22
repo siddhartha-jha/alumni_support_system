@@ -1,32 +1,86 @@
-﻿<!DOCTYPE html>
+﻿{% extends 'header.html' %}
+{% block title %}
+<title>{{user.get_full_name}} | Alumni Support System</title>
+{% endblock %}
 
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="utf-8" />
-    <title>View Profile </title>
-</head>
-<body>
-    {% if messages %}
-        <ul class="messages">
-        {% for message in messages %}
-            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-        {% endfor %}
-        </ul>
-    {% endif %}
-    <h1> Profile : </h1>
-    <h2> Name : {{user.get_full_name}}</h2>
-    <ul>
-        <li> Username : {{user.username}}</li>
-        <li> Dp : <img src="{{user.profile.pic.url}}" alt="can't display" height="100" width="100" />
-        <li> Email : {{user.email}}</li>
-        <li> Bio : {{user.profile.bio}}</li>
-        <li> DOB : {{user.profile.birth_date}}</li>
-        <li>Batch : {{user.profile.batch}}</li>
-        <li> City : {{user.profile.city}}</li>
-        <li> Organization : {{user.profile.organization}}</li>
-        <li> Website : {{user.profile.website}}</li>
-    </ul>
-    <a href="/profile/editprofile"> Edit Profile</a>
-    <a href="/">Home</a>
-</body>
-</html>
+{% block content %}
+        <br><br>
+    <div class="row">
+        <div class="col-md-3">
+            <img src="{{user.profile.pic.url}}" alt=":/" class="img-responsive img-rounded center-block">
+            
+            <center><h3 class="center-block">{{user.get_full_name}}</h3></center>
+            <div class="row">
+                <center>
+                {% if user.profile.twitter %}
+                    <a href="{{user.profile.twitter}}" class="fa fa-twitter" style="font-size: 36px;color:#1b809e;text-decoration: none"></a>
+                {% endif %}
+                {% if user.profile.linkedin %}
+                    <a href="{{user.profile.linkedin}}" class="fa fa-linkedin" style="font-size:36px;color:#1b809e;text-decoration: none"></a>
+                {% endif %}
+                </center>
+            </div>
+            <hr>
+            <ul class="nav nav-pills nav-stacked">  
+                <li role="presentation" class="active"><a href="/profile">View Profile</a></li>
+                <li role="presentation"><a href="/profile/editprofile">Edit profile</a></li>
+                <li role="presentation"><a href="/settings/changepassword">Change Password</a></li>
+                <li role="presentation"><a href="/settings/deleteuser">Delete User</a></li>
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                    <h2>{{user.get_full_name}}</h2>
+            </div>
+            <div class="row">
+                    <h3>
+                        {{user.profile.bio}}
+                    </h3>
+            </div><br>
+            {% if user.email %}
+            <div class="row input-group">
+                <span class="input-group-addon"> Email </span>
+                <span class="form-control">{{user.email}}</span>
+            </div>
+            {% endif %}
+            {% if user.profile.batch %}
+            <div class="row input-group">
+                <span class="input-group-addon">Batch</span>
+                <span class="form-control">{{user.profile.batch}}</span>
+            </div>
+            {% endif %}
+            {% if user.profile.city %}
+            <div class="row input-group">
+                <span class="input-group-addon">Location</span>
+                <span class="form-control">{{user.profile.city}}</span>
+            </div>
+            {% endif %}
+            {% if user.profile.gender %}
+            <div class="row input-group">
+                <span class="input-group-addon">Gender</span>               
+                <span class="form-control">{{user.profile.gender}}</span>
+            </div>
+            {% endif %}
+            {% if user.profile.organization %}
+            <div class="row input-group">
+                <span class="input-group-addon">Currently Working at</span>
+                <span class="form-control">{{user.profile.organization}}</span>
+            </div>
+            {% endif %}
+            {% if user.profile.website %}
+            <div class="row input-group">
+                <span class="input-group-addon">Website</span>
+                <span class="form-control">{{user.profile.website}}</span>
+            </div>
+            {% endif %}
+        </div>
+        <div class="col-md-3">
+        <h3>Your Content</h3>
+            <ul class="nav nav-pills nav-stacked">
+                <li role="presentation"><a href="/profile/viewtestimonial/">View Testimonials</a></li>
+                <li role="presentation"><a href="/profile/writetestimonial/">Write Testimonials</a></li>
+                <li role="presentation"><a href="/questionanswer/viewaskedquestions/">Asked Questions</a></li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}
