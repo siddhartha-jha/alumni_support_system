@@ -1,83 +1,98 @@
 ﻿{% extends "header.html" %}
+{% block style %}
+.fiel {
+    display:block;
+    font-size:18px;
+    font-family:Palatino Linotype;
+}
+.hidden {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+{% endblock %}
+
 {% block content %}
+
+<div class="hidden">
 {%if user.username %}
-    <p>Welcome {{user.username}}! </p>
+    <p>Welcome {{user.first_name}}! </p>
     <a href="profile">view profile</a>      
     <a href="logout">logout</a>
     <a href="settings">settings</a>
+    <a href="questionanswer"> q &amp; a</a>
+    <a href="event">events</a>
+    <a href="people">people</a>
+    <a href="careerservicesdepartment">Career Services Department</a>
+    <a href="testimonial">Testimonials</a>
 {%endif%}
+</div>
 <!--Photo references-->
+{%load static %}
 <div class="row">
-	<h3>alumni team/top alumni</h3>
-	<div class="col-md-3">
-		<img src= "#" class="img-circle" alt="p1">
-		<p>Anmol Jindal<br>dean alumni associaton<br>III year</p>	
-	</div>
-	<div class="col-md-3">
-		<img src="#" class="img-circle" alt="p1">
-		<p>Siddhartha jha<br>alumni relations manager<br>III year</p>	
-	</div>
-	<div class="col-md-3">
-		<img src="#" class="img-circle" alt="p1">
-		<p>Mohak verma<br>sr secretary<br>III year</p>	
-	</div>
-	<div class="col-md-3">
-		<img src="#" class="img-circle" alt="p1">
-		<p>ek aur banda<br>uski post<br>aur kuch aur</p>	
-	</div>
+	<center><h3>Alumni Association Members</h3><br>
+    <i>
+	<div class="col-md-6" style="font-size:17px;color: #888;">
+		<center>
+        <img src="{% static 'img/aj.jpg' %}" class="img-circle" alt="image not found" height="80" width="80">
+		<p>Anmol Jindal<br>Google<br>2014-2018</p>	
+	   </center>
+    </div>
+	<div class="col-md-6" style="font-size:17px;color: #888;">
+		<center>
+        <img src="{% static 'img/sj.jpg' %}" class="img-circle" alt="image not found" height="80" width="80">
+		<p>Siddhartha jha<br>Microsoft<br>2014-2018</p>	
+        </center>
+    </div>
+    </i>
+    </center>
 </div>
 <hr class="featurette-divider">
 <div class="row">
-
-	<!--testimonials-->
-	<div class="col-md-8">
-		<h2>Testimonials</h2>
-		<div class="container-fluid">
-			<h3>Testimonial 1</h3>
-			<p>something is said here please read all the documents carefully.something is said here please read all the documents carefully.something is said here please read all the documents carefully.something is said here please read all the documents carefully</p>
-		</div>
-		<div class="container-fluid">
-			<h3>Testimonial 1</h3>
-			<p>something is said here please read all the documents carefully.something is said here please read all the documents carefully.something is said here please read all the documents carefully.something is said here please read all the documents carefully</p>
-		</div>
-		<div class="container-fluid">
-			<h3>Testimonial 1</h3>
-			<p>something is said here please read all the documents carefully.something is said here please read all the documents carefully.something is said here please read all the documents carefullysomething is said here please read all the documents carefully</p>
-		</div>
-		<div class="container-fluid">
-			<h3>Testimonial 1</h3>
-			<p>something is said here please read all the documents carefully.something is said here please read all the documents carefully.something is said here please read all the documents carefullysomething is said here please read all the documents carefully</p>
-		</div>		
-	</div>
-
-	<!--events-->
-	<div class="col-md-4">
-		<h3>Events</h3>
-		<div class="container-fluid">
-			<h3>Event 1</h3>
-			<p>location</p>
-			<p>date</p>
-			<p>time</p>
-			<img src="" alt="gliphicon +">
-		</div>
-		<div class="container-fluid">
-			<h3>Event 1</h3>
-			<p>location</p>
-			<p>date</p>
-			<p>time</p>
-			<img src="" alt="gliphicon +">
-		</div>
-	</div>
-	<!--memories grid-->
-	<div class="col-md-8">
-		<h3>Memories</h3>
-	</div>
-	<!--news-->
-	<div class="col-md-4">
-		<h3>News</h3>
-		<div class="row">
-			<div class=""></div>
-		</div>
-	</div>
+<div class="col-md-9">
+	<div class="row">
+    <center><h3>Testimonial</h3></center>
+    {% if test %}
+    <div class="row">
+        {% for t in test %}
+            <div class="row">
+                <h3 style="color: #666;font-family:Palatino Linotype;"><i>&quot;{{t.content}}&quot;</i></h3>
+                <span style="font-size:16px;"><strong>-{{t.user.get_full_name}}</strong></span>
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    </div><hr>
+    <div class="row">
+         <center><h3>Memories</h3></center>
+     {% if gal %}
+     <div class="row">
+        {% for g in gal %}
+            <div class="col-md-4" style="margin-bottom:10px">
+                <img src="{{g.pic.url}}" alt="cannot display" height="100%" width="100%" class="img-rounded" />
+            </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    </div>
 </div>
+<div class="col-md-3">
+    <center><h3>Events</h3></center>
+    {% if eve %}
+        {% for e in eve %}
+            <div class="row">
+            <center>
+                <span class="fiel"><a href="{% url 'view_event4' pk1=e.pk %}"> {{e.title}} </a></span>
+                <span class="fiel">{{e.venue}}</span>
+                <span class="fiel">{{e.date}}</span>
+                <span class="fiel">{{e.time}}</span>
+            </center>
+            </div>
+        {% endfor %}
+    {% endif %}
+</div>
+   
 {% endblock %}

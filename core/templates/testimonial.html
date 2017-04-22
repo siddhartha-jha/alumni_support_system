@@ -1,0 +1,38 @@
+﻿{% extends "header.html" %}
+
+{% block title %}
+
+<title>Testimonials</title>
+
+{% endblock %}
+
+{% block style %}
+
+.testi {
+    border:1px solid #eee;
+    padding:40px;
+    margin-top:10px;
+    border-radius:5px;
+    border-left-color: #1b809e;
+    border-left-width: 5px;
+    background-color: #f7f7f9;
+}
+
+{% endblock %}
+
+{% block error %}
+<something></something>
+{% endblock %}
+
+{% block content %}
+    <center><h1>Testimonials</h1></center>
+    <div class="row">
+    {%for t in test %}
+        <div class="row testi">
+            <center><h3 style="color: #666;font-family:Palatino Linotype;"><i>&quot;{{t.content}}&quot;</i></h3></center><br>
+            - <a href="{% url 'view_profile5' pk2=t.user.pk %}">{{t.user.get_full_name}}</a>
+            <img src="{{t.user.profile.pic.url}}" alt="cannot display" height="35" width="35" class="img-circle" />
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}

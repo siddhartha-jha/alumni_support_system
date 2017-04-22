@@ -1,0 +1,59 @@
+﻿{% extends "header.html" %}
+
+{% block title %}
+<title>Career Services | Alumni Support System</title>
+{% endblock %}
+
+{% block style %}
+
+.testi {
+    border:1px solid #eee;
+    padding:40px;
+    margin-top:10px;
+    border-radius:5px;
+    border-left-color: #1b809e;
+    border-left-width: 5px;
+    background-color: #f7f7f9;
+}
+
+#id_subject {
+    width:390px;
+    height:50px;
+    border:1px solid #ccc;
+    border-radius:4px;    
+
+}
+
+#id_body {
+    width:380px;
+    height:200px;
+    resize:none;
+    border:1px solid #ccc;
+    border-radius:4px;
+}
+
+{% endblock %}
+
+{% block content %}
+    <center><h1> Career Services Department </h1></center>
+    <div class="row testi">      
+<h2 style="color: #666;font-family:Palatino Linotype;"><center>
+Career Services Department continuously strives to help students in pursuing their career goals by acquiring employment-seeking skills and ultimately to attain desired employment. This is accomplished through building a strong partnership amongst students, alumni, faculty members and industries.
+
+The University follows a centralized placement activity which gives each branch equal opportunity to grow for sustained excellence in career through training & placement.
+</center></h2>
+    </div>
+    
+    <form method="post">
+        {%csrf_token%}
+        <div class="row">
+        <center>
+            <p style="font-size: 30px;"> You can mail us your query using the form below </p>
+            {{email_form.as_p}}
+            <button type="submit" class="btn btn-primary">Send Mail</button>
+        </center>
+        </div>
+    </form>
+{% endblock %}
+
+<!--Fields are subject and body-->

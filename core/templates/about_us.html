@@ -1,0 +1,37 @@
+﻿{% extends "header.html" %}
+{% block title %}
+<title>About Us</title>
+{% endblock %}
+
+{% block style %}
+.testi {
+	border:1px solid #eee;
+    padding:10px;
+    margin-top:10px;
+    border-radius:5px;
+    background-color: #f7f7f9;
+}
+{% endblock %}
+
+{% block content %}
+<div class="row">
+<center><h1>About Us</h1></center>
+	<script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>
+	<div class="row">
+		<h2 style="color: #666;font-family:Palatino Linotype;"><center>
+		<i>&quot;We are a bunch of geeks working towards the betterment of the society around us&quot;</i>
+		</center></h2>
+	</div>
+	<br><br>
+	<div class="center-block row">
+		<center>
+			<div class="col-md-6">
+				<div class="LI-profile-badge"  data-version="v1" data-size="medium" data-locale="en_US" data-type="vertical" data-theme="light" data-vanity="anmoljindal"><a class="LI-simple-link" href='https://in.linkedin.com/in/anmoljindal?trk=profile-badge'>Anmol Jindal</a></div>
+			</div>
+			<div class="col-md-6">
+				<div class="LI-profile-badge"  data-version="v1" data-size="medium" data-locale="en_US" data-type="vertical" data-theme="light" data-vanity="siddhartha-jha-bb16aa13a"><a class="LI-simple-link" href='https://in.linkedin.com/in/siddhartha-jha-bb16aa13a?trk=profile-badge'>Siddhartha Jha</a></div>
+			</div>
+		</center>
+	</div>
+</div>
+{% endblock %}

@@ -2,47 +2,92 @@
 <html lang="en">
 
 <head>
+    {% block title %}
     <title>Alumni</title>
+    {% endblock %}
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" >
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     {% load staticfiles %}
    <!-- <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"> -->
     <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
     <style>
-        .navbar {
-            margin: 0;
-        }
+        body {padding: 70px; }
 
         .row {
             margin: 5px;
         }
+
+        .icon-pic {
+            height: 40px;
+            width: 40px;
+        }
+        
+        #dopper {
+            background-color: inherit;
+            color: #888888;
+            border:none;
+        }
+
+        .errormsg {
+            background-color: #4286f4;
+            font-family: sans-serif;
+            padding: 10px;
+            text-align: center;
+            width: 100%;
+            list-style: none;
+        }
+
+        {% block style %}
+            
+        {% endblock %}
     </style>
 </head>
-<body class="body">
-    <div class="container-fluid navbar-wrapper">
+<body>
+<div class="body">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
-            <nav class="navbar navbar-default navbar-static-top">
-                <div class="container">
-                    <h1>ALUMNI SUPPORT SYSTEM</h1>
-                </div>
-            </nav>
+            <div class="navbar-header">
+            <a class="navbar-brand" href="/">
+                Alumni Support System
+            </a>
+            </div>
+            <div>
+                <ul class="nav navbar-nav">
+                    <li><a href="/questionanswer">Forum</a></li>
+                    <li><a href="/event">Events</a></li>
+                    <li><a href="/testimonial">Testimonials</a></li>
+                    <li><a href="/careerservicesdepartment">Career Services</a></li>
+                    <li><a href="/people">People</a></li>
+                </ul>
+            </div>
+             <div class="dropdown navbar-right skip">
+                <button id="dopper" class="btn btn-default dropdown-toggle " type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    {{user.get_full_name}}
+                    {% if user.profile.pic %}
+                    <img src="{{user.profile.pic.url}}" class="img-circle icon-pic">
+                    {% endif %}
+                    <span class="caret"></span>
+                </button >
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <li><a href="/profile">View Profile</a></li>
+                    <li><a href="/profile/editprofile">Edit Profile</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="/logout">Logout</a></li>
+                </ul>
+            </div>
         </div>
-
-        <div class="container">
-            <nav class="navbar navbar-default navbar-static-top">
-                <div class="container">
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">HOME <span class="sr-only">(current)</span></a></li>
-                        <li><a href="#">MEETS</a></li>
-                        <li><a href="#">CAREERS</a></li>
-                        <li><a href="#">FORUM</a></li>
-                    </ul>
-                </div>
-            </nav>
-        </div>
-    </div>
-
+    </nav>
+        {% block error %}
+        {% if messages %}
+            <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }} errormsg"{% endif %}>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+        {% endblock %}
     <div class="container">
         {% block content %}
         {% endblock %}
@@ -54,10 +99,14 @@
         <footer>
             <br><br>
             <p class="pull-right"><a href="#">Back to top</a></p>
-            <p>&copy; 2017 Anmol Jindal &middot; Siddhartha Jha &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a> &middot; <a href="#">Contact Us</a></p>
+            <p>&copy; 2017 Anmol Jindal &middot; Siddhartha Jha &middot; <a href="/aboutus">About Us</a></p>
             <br><br>
         </footer>
     </div>
+</div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
 </body>
 
 </html>
